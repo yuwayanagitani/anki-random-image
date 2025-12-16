@@ -1,26 +1,34 @@
-# 🎲✨ Random Images for Anki
+# ✨ Random Images for Anki (anki-random-images)
 
-Add a little surprise to every review session.
+Study can get repetitive. This add-on adds a small surprise: it shows a random image in the Reviewer when a card is displayed.
 
-**Random Images for Anki** is a lightweight add-on that **injects a random image from your collection media folder** into the Reviewer—on the **Question side**, the **Answer side**, or both.
-
-Perfect for:
-- 🧠 mood boosters during long study sessions
-- 🐾 “cute animal breaks” while grinding Anki
-- 🖼️ quick visual variety without changing your note templates
+- No AI
+- No network
+- No data upload
+- Works with any note type (does not require template edits)
 
 ---
 
-## 🌈 What it does
+## 🔗 AnkiWeb
+
+Official AnkiWeb page:
+
+👉 https://ankiweb.net/shared/info/1726486470
+
+(Recommended install method for easy setup and automatic updates.)
+
+---
+
+## ✅ What it does
 
 When a card is shown in the Reviewer, the add-on can:
 
-- pick a random image from a folder inside `collection.media/`
-- append it to the card HTML
-- (optionally) show a filename-style caption
-- (optionally) avoid showing the same image twice in a row
+- Pick a random image from a folder inside `collection.media/`
+- Inject the image into the card HTML (Question side, Answer side, or both)
+- Optionally show a cleaned filename caption under the image
+- Optionally avoid showing the same image twice in a row
 
-It uses Anki’s `card_will_show` hook, so it works with any note type without editing templates.
+It uses Anki’s `card_will_show` hook, so it works with any note type without touching your templates.
 
 ---
 
@@ -29,120 +37,155 @@ It uses Anki’s `card_will_show` hook, so it works with any note type without e
 ### 1) Put images in your media subfolder
 
 1. Open Anki
-2. Go to **Add-ons → Random Images → Config**
-3. Click **Open folder**
+2. Go to: Tools → Add-ons → Random Images → Config
+3. Click: Open folder
 
 This creates (or opens) a folder like:
 
-```
-collection.media/random_images/
-```
+- `collection.media/random_images/`
 
-Drop images into that folder.
+Drop your images into that folder.
 
 Supported extensions:
-- `.png`, `.jpg`, `.jpeg`, `.gif`
 
----
+- `.png`
+- `.jpg`
+- `.jpeg`
+- `.gif`
 
-### 2) Enable where you want images
+### 2) Choose where images appear
 
-In settings, choose:
-- ✅ Show on Question side
-- ✅ Show on Answer side
+In the Config GUI, enable:
+
+- Show on Question side
+- Show on Answer side
 
 You can enable one or both.
 
 ---
 
-## 🎛️ Settings (Config GUI)
+## ⚙️ Settings (Config GUI)
 
 Open:
-- **Tools → Add-ons → Random Images → Config**
 
-### ✅ Enable add-on
+- Tools → Add-ons → Random Images → Config
+
+Main options:
+
+### Enable add-on
 Turn the add-on on/off.
 
-### 🃏 Show on Question / Answer
-Choose which side(s) of the card get the random image.
+### Show on Question / Answer
+Choose which side(s) of the card will get the random image.
 
-### 📁 Image folder (inside collection.media)
+### Image folder (inside `collection.media`)
 Default: `random_images`
 
-⚠️ Safety rules:
-- must be a **simple subfolder name**
-- absolute paths and `..` are rejected
+Safety rules:
+
+- Must be a simple subfolder name
+- Absolute paths are rejected
+- `..` is rejected
 - Windows backslashes are normalized
 
 Examples:
-- ✅ `random_images`
-- ✅ `motivation/pics`
-- ❌ `C:\Users\...`
-- ❌ `../something`
 
-### 📏 Max width (%)
+- OK: `random_images`
+- OK: `motivation/pics`
+- NG: `C:\Users\...`
+- NG: `../something`
+
+### Max width (%)
 Default: `80%`  
-Set to `0` to disable the limit.
+Set `0` to disable the limit.
 
-### 📐 Max height (vh)
+### Max height (vh)
 Default: `60vh`  
-Set to `0` to disable the limit.
+Set `0` to disable the limit.
 
-### 🔁 Avoid repeat
+### Avoid repeat
 Default: ON  
-If multiple images exist, it won’t show the same one twice in a row.
+If multiple images exist, it avoids showing the same file twice in a row.
 
-### 🏷️ Show filename caption
+### Show filename caption
 Default: ON  
-Shows a cleaned-up filename (uppercase) under the image.
+Shows a cleaned-up filename under the image.
 
 Example:
+
 - `cute-cat_2024-01.jpg` → `CUTE CAT`
 
 ---
 
 ## 🧩 How it works (technical overview)
 
-- The add-on picks a random file from your configured folder under `collection.media/`
-- It appends HTML like:
+- Chooses a random file from your configured folder under `collection.media/`
+- Injects HTML like:
+  - An `<img>` tag with size limits
+  - An optional caption block
 
-- `<img src="folder/file.jpg" style="max-width:...; max-height:...; border-radius:8px">`
-- plus an optional caption block
+Important:
 
-It does **not** modify your notes or your collection permanently—it only changes what is rendered in the Reviewer.
+- It does not modify notes
+- It does not change your collection permanently
+- It only affects what is rendered in the Reviewer
 
 ---
 
-## 🛠️ Troubleshooting
+## 🛠 Troubleshooting
 
-### “No image shows up”
+### No image shows up
 Check:
-- the add-on is enabled
-- your folder exists and contains supported image files
+
+- The add-on is enabled
+- The folder exists and contains supported image files
 - “Show on Question/Answer” is enabled for that side
 
 ### “Open folder” says “No collection is open”
-Open a deck/collection first, then try again.
+Open a collection/deck first, then try again.
 
-### Images are too big/small
+### Images are too big / small
 Adjust:
-- **Max width (%)**
-- **Max height (vh)**
+
+- Max width (%)
+- Max height (vh)
 
 ### It keeps showing the same image
-Turn on:
-- **Avoid showing the same image twice in a row**
-(Works best when you have multiple files.)
+Enable:
+
+- Avoid repeat  
+(Works best when you have multiple images in the folder.)
 
 ---
 
 ## 🔒 Privacy
 
-No network calls, no AI, no data upload.  
-Everything stays inside your local Anki collection.
+- No network calls
+- No AI
+- No data upload
+
+Everything stays in your local Anki collection.
+
+---
+
+## 📦 Installation
+
+### Install from AnkiWeb (recommended)
+
+1. Tools → Add-ons → Browse & Install
+2. Open the AnkiWeb page and install:
+   - https://ankiweb.net/shared/info/1726486470
+3. Restart Anki
+
+### Manual install (GitHub)
+
+1. Download this repository
+2. Put it into:
+   - `Anki2/addons21/anki-random-images`
+3. Restart Anki
 
 ---
 
 ## 📜 License
 
-See `LICENSE` in this repository.
+MIT License (see `LICENSE`).
